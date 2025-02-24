@@ -12,8 +12,8 @@ import { Student } from "./entity/student.entity";
 import { describe } from "node:test";
 import { Teacher } from "./entity/teacher.entity";
 import { Class } from "./entity/class.entity";
-// import studentRoute from "./routes/student.route";
-// import teacherRoute from "./routes/teacher.route";
+import studentRoute from "./routes/student.route";
+import teacherRoute from "./routes/teacher.route";
 
 // Load environment variables early
 dotenv.config();
@@ -37,8 +37,8 @@ const swaggerSpec = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Default Route
-// app.use("/api/student", studentRoute);
-// app.use("/api/teacher", teacherRoute);
+app.use("/api/student", studentRoute);
+app.use("/api/teacher", teacherRoute);
 
 
 // Create Telegram Bot instance
@@ -116,7 +116,7 @@ bot.onText(/\/class/, async (msg) => {
     }
 
     const classList = grade.map(
-      (grade) => `📌 Class Name🎉\n${grade.class_name}\n\n📌 Subject📚\n🔥${grade.subject}\n\n📌 Teacher_id🪪\n${grade.id}\n\n`
+      (grade) => `📌 Class Name🎉\n${grade.class_name}\n\n📌 Subject📚\n🔥${grade.subject}\n\n`
     ).join("\n");
     const caption = `📋 Class List 📝 `;
 
